@@ -8,6 +8,9 @@ import {
   MessageFormComponent,
   MessageItemComponent
 } from "@app/components";
+import { HttpClientModule } from "@angular/common/http";
+import { ContentService } from "@app/providers/content.service";
+import {ApiService} from '@app/providers';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import {
     MessageFormComponent,
     MessageItemComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpModule],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, FormsModule, HttpClientModule],
+  bootstrap: [AppComponent],
+  providers: [ContentService, ApiService]
 })
 export class AppModule {}

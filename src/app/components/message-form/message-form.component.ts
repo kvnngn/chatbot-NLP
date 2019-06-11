@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Message } from "@app/models";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { ContentService } from "@app/providers/content.service";
 
 @Component({
   selector: "app-message-form",
@@ -13,13 +15,30 @@ export class MessageFormComponent implements OnInit {
   @Input("messages")
   private messages: Message[];
 
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+    private contentService: ContentService
+  ) {}
 
   ngOnInit() {}
 
   public sendMessage(): void {
     this.message.timestamp = new Date();
     this.messages.push(this.message);
+    this.botReply();
+  }
+
+  public botReply() {
+    console.log(this.message.content);
+    this.contentService
+      .getContentFromUrl(this.message.content)
+      .subscribe(res => {
+        console.log(res);
+      });
+    this.message.timestamp = new Date();
     this.message = new Message("", "assets/images/user.png");
+    this.messages.push(
+      new Message("", "assets/images/bot.png", this.message.timestamp)
+    );
   }
 }
