@@ -49,6 +49,7 @@ export class MessageFormComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.message.timestamp = new Date();
         this.messages.push(
           new Message(
             "Sorry, but the message doesn't contain any valid link. Please just send me the link.",
