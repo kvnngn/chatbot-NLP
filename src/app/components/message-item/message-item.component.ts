@@ -8,7 +8,7 @@ import { Message } from "@app/models";
 })
 export class MessageItemComponent implements OnInit {
   @Input("message")
-  private message: Message;
+  message: Message;
 
   constructor() {}
 

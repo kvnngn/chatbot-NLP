@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  token: ''
+  token: '',
+  origin: 'http://localhost:1234',
 };

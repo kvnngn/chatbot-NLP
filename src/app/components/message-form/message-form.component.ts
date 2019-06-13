@@ -10,10 +10,10 @@ import { ContentService } from "@app/providers/content.service";
 })
 export class MessageFormComponent implements OnInit {
   @Input("message")
-  private message: Message;
+  message: Message;
 
   @Input("messages")
-  private messages: Message[];
+  messages: Message[];
 
   constructor(
     private http: HttpClient,
