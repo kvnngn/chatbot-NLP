@@ -29,16 +29,35 @@ export class MessageFormComponent implements OnInit {
   }
 
   public botReply() {
-    console.log(this.message.content);
-    this.contentService
-      .getContentFromUrl(this.message.content)
-      .subscribe(res => {
-        console.log(res);
-      });
-    this.message.timestamp = new Date();
-    this.message = new Message("", "assets/images/user.png");
-    this.messages.push(
-      new Message("", "assets/images/bot.png", this.message.timestamp)
+    this.contentService.getContentFromUrl(this.message.content).subscribe(
+      stats => {
+        console.log(stats);
+        if (stats.length > 0) {
+          this.message.timestamp = new Date();
+          let answer = "";
+          stats.forEach((stat, i) => {
+            answer += i + 1 + ". " + stat.token + ": " + stat.stat + " %\n";
+          });
+          this.messages.push(
+            new Message(
+              "Here, the most interesting topics about the website:\n" + answer,
+              "assets/images/bot.png",
+              this.message.timestamp
+            )
+          );
+        }
+      },
+      err => {
+        console.log(err);
+        this.messages.push(
+          new Message(
+            "Sorry, but the message doesn't contain any valid link. Please just send me the link.",
+            "assets/images/bot.png",
+            this.message.timestamp
+          )
+        );
+      }
     );
+    this.message = new Message("", "assets/images/user.png");
   }
 }
