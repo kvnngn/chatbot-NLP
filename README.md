@@ -7,7 +7,7 @@ ChatBot with Angular 5
 - NodeJS: (>=8.9.0) - https://nodejs.org/
 - Angular: npm install -g @angular-cli
 
-## Launch api
+## Launch website on your computer
 
 1. Run in terminal ```npm install```
 2. Run in terminal ```ng serve```
